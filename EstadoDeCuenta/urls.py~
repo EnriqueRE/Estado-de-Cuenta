@@ -17,7 +17,7 @@ urlpatterns = patterns('',
                        # url(r'^blog/', include('blog.urls')),
 
                        url(r'^admin/', include(admin.site.urls)),
-                       url(r'^(ldap/?P<username>[a-zA-Z0-9_.-@]+)/(?P<password>[a-zA-Z0-9_.-@]+)$',
+                       url(r'^(?P<username>[a-zA-Z0-9_.-@]+)/(?P<password>[a-zA-Z0-9_.-@]+)$',
                            'Estado.views.checkUserInLdap'),
                        url(r'^Statement_Search',
                            views.StatementSearch.as_view(model='AccountStatement')),
