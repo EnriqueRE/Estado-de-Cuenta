@@ -4,7 +4,9 @@
     <data-source source="LOCAL" name="Django default" uuid="7a321498-d9d3-496e-8c7f-562ef4eb99c4">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/Estado_de_Cuenta</jdbc-url>
+      <user-name>Estado_DBA</user-name>
+      <user-password>dfcbdfcedfc7dfc3dfc4</user-password>
       <libraries>
         <library>
           <url>file://$USER_HOME$/Library/Preferences/PyCharm20/jdbc-drivers/postgresql-9.1-901.jdbc3.jar</url>

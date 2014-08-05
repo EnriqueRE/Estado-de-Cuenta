@@ -24,6 +24,7 @@ class StatementAdmin (admin.ModelAdmin):
           'statement_date',
           'statement_student',
           'statement_tuition',
+	  'statement_interests',
           'statement_positive_balance',
           'statement_insurance',
           'statement_diverse_services',

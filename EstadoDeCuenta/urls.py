@@ -17,10 +17,13 @@ urlpatterns = patterns('',
                        # url(r'^blog/', include('blog.urls')),
 
                        url(r'^admin/', include(admin.site.urls)),
-                       url(r'^(?P<username>[a-zA-Z0-9_.-@]+)/(?P<password>[a-zA-Z0-9_.-@]+)$',
+
+                       url(r'^ldap/',
                            'Estado.views.checkUserInLdap'),
                        url(r'^Statement_Search',
-                           views.StatementSearch.as_view(model='AccountStatement')),
+                           views.StatementSearch.as_view(
+                               model='AccountStatement')),
                        url(r'^', include(router.urls)),
-                       url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+                       url(r'^api-auth/', include('rest_framework.urls',
+                                                  namespace='rest_framework')),
 )

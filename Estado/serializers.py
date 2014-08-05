@@ -6,7 +6,7 @@ from models import MonederoUser, AccountStatement
 class AccountSerializer (serializers.ModelSerializer):
      class Meta:
           model = AccountStatement
-          fields = ('statement_id', 'statement_student', 'statement_date', 'statement_tuition',
+          fields = ('statement_id', 'statement_student', 'statement_date', 'statement_tuition','statement_interests',
                     'statement_insurance', 'statement_diverse_services')
 
 

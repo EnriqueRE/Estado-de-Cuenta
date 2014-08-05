@@ -1,4 +1,3 @@
-from macerrors import requiredFlagsDontMatch
 from django.db import models
 
 # Create your models here.
@@ -12,6 +11,7 @@ class AccountStatement (models.Model):
      statement_date = models.DateField ()
      statement_student = models.ForeignKey ('MonederoUser')
      statement_tuition = models.FloatField ()
+     statement_interests = models.FloatField()
      statement_positive_balance = models.FloatField ()
      statement_insurance = models.FloatField ()
      statement_diverse_services = models.FloatField ()

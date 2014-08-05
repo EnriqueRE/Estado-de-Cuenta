@@ -14,17 +14,27 @@ from django.views.generic import TemplateView
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from Estado.AuthenticationUtils import search_for_user, authenticate_user, RESPONSE_DICTIONARY
+from Estado.AuthenticationUtils import search_for_user, authenticate_user, \
+    RESPONSE_DICTIONARY
 from models import MonederoUser, AccountStatement
 from serializers import UserSerializer, AccountSerializer
+
+import base64
+
+from functools import wraps
+
+from django.http import HttpResponse
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 
 
 # Filters
 class StatementFilter(django_filters.FilterSet):
-    max_date = django_filters.DateTimeFilter(name='statement_date', lookup_type='lte')
-    min_date = django_filters.DateTimeFilter(name='statement_date', lookup_type='gte')
+    max_date = django_filters.DateTimeFilter(name='statement_date',
+                                             lookup_type='lte')
+    min_date = django_filters.DateTimeFilter(name='statement_date',
+                                             lookup_type='gte')
     username = django_filters.CharFilter(name='statement_student',
                                          lookup_type='student_id')
 
@@ -56,8 +66,15 @@ class StatementSearch(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
-def checkUserInLdap(request, username, password):
-    #TODO: Change the data from the url to header in order to encrypt 
+def checkUserInLdap (request):
+    
+    if request.META.has_key('HTTP_AUTHORIZATION'):
+        authmeth, auth = request.META['HTTP_AUTHORIZATION'].split(' ', 1)
+        if authmeth.lower() == 'basic':
+            auth = auth.strip().decode('base64')
+            username, password = auth.split(':', 1)
+
+            print("%s %s") % (username, password)
 
     # Check if user exists
     message = ""
