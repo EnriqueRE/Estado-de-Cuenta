@@ -67,7 +67,6 @@ class StatementSearch(generics.ListCreateAPIView):
 
 
 def checkUserInLdap (request):
-    
     if request.META.has_key('HTTP_AUTHORIZATION'):
         authmeth, auth = request.META['HTTP_AUTHORIZATION'].split(' ', 1)
         if authmeth.lower() == 'basic':
