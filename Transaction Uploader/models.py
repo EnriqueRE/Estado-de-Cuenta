@@ -52,12 +52,23 @@ class AccountStatement:
 
 
 class MonederoUser:
-    def __init__ (self):
-        student_id = ""
-        student_name = ""
-        student_middle_name = ""
-        student_lastname = ""
-        student_second_lastname = ""
-        student_badge_id = ""
-        student_email = ""
+    def __init__ (self,row):
+        self.student_id = row[0]
+        self.student_name = row[2]
+        self.student_lastname = row[3]
+        self.student_second_lastname = row[4]
+        self.student_badge_id = row[5]
+        self.student_email = self.student_id + "@itesm.mx"
 
+    def to_json (self):
+        return json.dumps(self, default=lambda direct: direct.__dict__,
+                          sort_keys=True, indent=4)
+
+    def upload_to_server (self):
+        request = urllib2.Request(
+            "http://riego.chi.itesm.mx:8080/User/")
+        request.add_header("Authorization", "Basic YWRtaW46YWRtaW4=")
+        request.add_header("Content-Type", "application/json")
+        request.get_method = lambda: 'POST'
+        print self.to_json()
+        result = urllib2.urlopen(request, self.to_json())

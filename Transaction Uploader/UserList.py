@@ -2,7 +2,6 @@ __author__ = 'alexrdz'
 
 import unicodecsv
 import xlrd
-import datetime
 
 from models import MonederoUser
 
@@ -23,12 +22,12 @@ def parse(xlsfile, name_of_sheet):
     print "Data written on " + output.name
     output.close()
 
+
 class UserList:
     def __init__(self):
         self.users_list = []
         self.students = []
         self.user = None
-
 
     def to_list(self, csvfile, delimiter=','):
         """
@@ -43,7 +42,6 @@ class UserList:
                 self.user = MonederoUser(row)
                 self.users_list.append(self.user)
         return self.users_list
-
 
     def sort_by_column(self, csv_list):
         """
@@ -63,8 +61,6 @@ class UserList:
         for self.user in csv_list:
             self.students.append(self.user.student_id)
         return self.students
-
-
 
 # Creates an instance of UserList
 app = UserList()
