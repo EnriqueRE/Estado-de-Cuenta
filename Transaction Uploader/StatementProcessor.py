@@ -55,7 +55,7 @@ class StatementProcessor:
         return matches
 
     @staticmethod
-    def process_transactions (statements, student):
+    def process_transactions(statements, student):
         tmp_services = 0.0
         tmp_insurance = 0.0
         tmp_credit = 0.0
@@ -109,11 +109,7 @@ class StatementProcessor:
                     or statement.statement_code == '1613':
                 tmp_services += float(statement.statement_value)
 
-        if len(student) <= 6:
-            tmp_student = 'A00' + student
-        else:
-            tmp_student = 'A0' + student
-        account_statement = AccountStatement(tmp_student,
+        account_statement = AccountStatement(student,
                                              statement.statement_date,
                                              abs(tmp_tuition),
                                              abs(tmp_interests),
@@ -121,5 +117,5 @@ class StatementProcessor:
                                              abs(tmp_insurance),
                                              abs(tmp_services))
 
-        print account_statement.to_json()
-        # account_statement.upload_to_server()
+        #print account_statement.to_json()
+        account_statement.upload()
